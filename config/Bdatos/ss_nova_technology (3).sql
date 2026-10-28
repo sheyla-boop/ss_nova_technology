@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2026 a las 21:36:28
+-- Tiempo de generación: 28-10-2026 a las 20:13:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -115,7 +115,14 @@ INSERT INTO `categories` (`id`, `name`, `slug`, `description`, `is_active`, `cre
 (1, 'Celulares', 'celulares', 'Dispositivos moviles y telefonos inteligentes', 1, '2026-08-22 04:52:29', '2026-08-22 04:52:29'),
 (2, 'Computadores', 'computadores', 'Computadores portatiles y de escritorio', 1, '2026-08-22 04:52:29', '2026-08-22 04:52:29'),
 (3, 'Accesorios', 'accesorios', 'Accesorios y complementos tecnologicos', 1, '2026-08-22 04:52:29', '2026-08-22 04:52:29'),
-(4, 'Tecnologia para el hogar', 'tecnologia-para-el-hogar', 'Dispositivos inteligentes para el hogar', 1, '2026-08-22 04:52:29', '2026-08-22 04:52:29');
+(4, 'Tecnologia para el hogar', 'tecnologia-para-el-hogar', 'Dispositivos inteligentes para el hogar', 1, '2026-08-22 04:52:29', '2026-08-22 04:52:29'),
+(5, 'Control e Infraestructura', 'control-infraestructura', 'Hubs, pantallas centrales, enchufes e interruptores inteligentes', 1, '2026-09-30 20:23:49', '2026-09-30 20:23:49'),
+(6, 'Climatización y Calidad del Aire', 'climatizacion-calidad-aire', 'Termostatos, purificadores, humidificadores y deshumidificadores conectados', 1, '2026-09-30 20:23:49', '2026-09-30 20:26:12'),
+(7, 'Limpieza y Mantenimiento', 'limpieza-mantenimiento', 'Robots aspiradores, mopas automaticas y basureros con sensor', 1, '2026-09-30 20:23:49', '2026-09-30 20:23:49'),
+(8, 'Seguridad y Accesos', 'seguridad-accesos', 'Camaras IP, timbres con video, cerraduras y sensores', 1, '2026-09-30 20:23:49', '2026-09-30 20:23:49'),
+(9, 'Iluminación Inteligente', 'iluminacion-inteligente', 'Bombillas RGB, tiras LED, paneles y lamparas inteligentes', 1, '2026-09-30 20:23:49', '2026-09-30 20:26:12'),
+(10, 'Cocina y Electrodomésticos', 'cocina-electrodomesticos', 'Freidoras, cafeteras, ollas y electrodomesticos conectados', 1, '2026-09-30 20:23:49', '2026-09-30 20:26:12'),
+(11, 'Audio y Entretenimiento', 'audio-entretenimiento', 'Altavoces, barras de sonido, streaming y proyectores conectados', 1, '2026-09-30 20:23:49', '2026-09-30 20:23:49');
 
 -- --------------------------------------------------------
 
@@ -137,7 +144,27 @@ CREATE TABLE `inventory` (
 INSERT INTO `inventory` (`product_id`, `quantity_available`, `low_stock_threshold`, `updated_at`) VALUES
 (1, 50, 5, '2026-08-28 20:30:25'),
 (2, 58, 5, '2026-08-28 20:30:50'),
-(3, 8327, 5, '2026-08-28 21:00:40');
+(3, 8326, 5, '2026-09-30 20:53:59'),
+(35, 94, 5, '2026-09-30 20:56:14'),
+(36, 279, 5, '2026-10-16 20:25:39'),
+(37, 140, 5, '2026-09-30 20:31:28'),
+(38, 110, 5, '2026-09-30 20:31:28'),
+(39, 64, 5, '2026-09-30 20:56:14'),
+(40, 50, 5, '2026-09-30 20:31:28'),
+(41, 85, 5, '2026-09-30 20:31:28'),
+(42, 39, 5, '2026-09-30 20:53:59'),
+(43, 75, 5, '2026-09-30 20:31:28'),
+(44, 160, 5, '2026-09-30 20:31:28'),
+(45, 90, 5, '2026-09-30 20:31:28'),
+(46, 44, 5, '2026-09-30 20:56:14'),
+(47, 210, 5, '2026-09-30 20:31:28'),
+(48, 350, 5, '2026-09-30 20:31:28'),
+(49, 129, 5, '2026-09-30 20:53:59'),
+(50, 78, 5, '2026-09-30 20:53:59'),
+(51, 59, 5, '2026-09-30 20:56:14'),
+(52, 35, 5, '2026-09-30 20:31:28'),
+(53, 55, 5, '2026-09-30 20:31:28'),
+(54, 120, 5, '2026-09-30 20:31:28');
 
 -- --------------------------------------------------------
 
@@ -185,6 +212,15 @@ CREATE TABLE `orders` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_number`, `user_id`, `status_id`, `payment_method_id`, `payment_status`, `recipient_name`, `recipient_phone`, `shipping_address`, `shipping_address_extra`, `shipping_city`, `shipping_state`, `shipping_postal_code`, `subtotal`, `shipping_cost`, `discount_amount`, `total_amount`, `customer_notes`, `created_at`, `updated_at`) VALUES
+(1, 'SN-20260930-CC3DFC', 3, 5, 1, 'pending', 'sheyla castaño', '3212123513', 'mi casa', 'el quiroga', 'Bogota', 'Cundinamarca', '', 4659600.00, 0.00, 0.00, 4659600.00, 'callejon donde roban mucho, gracias', '2026-09-30 20:53:59', '2026-09-30 21:00:34'),
+(2, 'SN-20260930-05A766', 3, 5, 1, 'pending', 'samuel santofimio', '3507155536', 'mi casa', '', 'Bogota', 'Cundinamarca', '', 1759600.00, 0.00, 0.00, 1759600.00, 'no she xd ajajajaj', '2026-09-30 20:56:14', '2026-09-30 21:01:16'),
+(3, 'SN-20261016-8A1E00', 3, 1, 1, 'pending', 'Samuel', '3212123513', 'cll 31d sur#18-02', '', 'bogota', 'Colombia', '', 59900.00, 0.00, 0.00, 59900.00, '', '2026-10-16 20:25:39', '2026-10-16 20:25:39');
+
 -- --------------------------------------------------------
 
 --
@@ -201,6 +237,21 @@ CREATE TABLE `order_items` (
   `quantity` int(10) UNSIGNED NOT NULL,
   `line_total` decimal(12,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `product_name`, `sku`, `unit_price`, `quantity`, `line_total`) VALUES
+(1, 1, 3, 'iphone 18 rojo', 'PROD-23CA662B', 3000000.00, 1, 3000000.00),
+(2, 1, 42, 'Robot Aspirador y Trapeador con Mapeo Láser LiDAR', 'SMH-LIMP-001', 1199900.00, 1, 1199900.00),
+(3, 1, 49, 'Tira LED Inteligente Neón con Sincronización de Música', 'SMH-LUZ-002', 139900.00, 1, 139900.00),
+(4, 1, 50, 'Lámpara de Noche Inteligente con Carga Inalámbrica', 'SMH-LUZ-003', 159900.00, 2, 319800.00),
+(5, 2, 35, 'Pantalla Inteligente con Asistente de Voz (Hub Central)', 'SMH-CTRL-001', 399900.00, 1, 399900.00),
+(6, 2, 39, 'Termostato Inteligente Programable Wi-Fi', 'SMH-CLIMA-001', 519900.00, 1, 519900.00),
+(7, 2, 46, 'Cerradura Digital Biométrica con Huella y Teclado', 'SMH-SEG-003', 479900.00, 1, 479900.00),
+(8, 2, 51, 'Freidora de Aire Inteligente con Pantalla Táctil', 'SMH-COC-001', 359900.00, 1, 359900.00),
+(9, 3, 36, 'Enchufe Inteligente Wi-Fi con Medidor de Consumo', 'SMH-CTRL-002', 59900.00, 1, 59900.00);
 
 -- --------------------------------------------------------
 
@@ -242,6 +293,18 @@ CREATE TABLE `order_status_history` (
   `note` varchar(500) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `order_status_history`
+--
+
+INSERT INTO `order_status_history` (`id`, `order_id`, `status_id`, `changed_by`, `note`, `created_at`) VALUES
+(1, 1, 1, 3, 'Pedido creado desde la tienda.', '2026-09-30 20:53:59'),
+(2, 2, 1, 3, 'Pedido creado desde la tienda.', '2026-09-30 20:56:14'),
+(3, 2, 2, 14, 'Estado actualizado desde el panel de empresa.', '2026-09-30 21:00:27'),
+(4, 1, 5, 14, 'Estado actualizado desde el panel de empresa.', '2026-09-30 21:00:34'),
+(5, 2, 5, 14, 'Estado actualizado desde el panel de empresa.', '2026-09-30 21:01:16'),
+(6, 3, 1, 3, 'Pedido creado desde la tienda.', '2026-10-16 20:25:39');
 
 -- --------------------------------------------------------
 
@@ -314,7 +377,27 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `category_id`, `brand_id`, `name`, `slug`, `sku`, `description`, `price`, `is_active`, `created_at`, `updated_at`) VALUES
 (1, 1, NULL, 'iphone 15 pro max', 'iphone-15-pro-max-7f4c1991', 'PROD-3A659AF9', 'laptop lenovo de buena calidad e increible funcionamiento', 250000.00, 1, '2026-08-28 20:30:25', '2026-08-28 20:30:25'),
 (2, 4, NULL, 'laptop lenovo 3-15', 'laptop-lenovo-3-15-1f2092ce', 'PROD-0B3C3272', 'loygtfmhnfjnydjh', 200000.00, 1, '2026-08-28 20:30:50', '2026-08-28 20:30:50'),
-(3, 1, NULL, 'iphone 18 rojo', 'iphone-18-rojo-87d950dc', 'PROD-23CA662B', 'telefono rojo', 3000000.00, 1, '2026-08-28 21:00:40', '2026-08-28 21:00:40');
+(3, 1, NULL, 'iphone 18 rojo', 'iphone-18-rojo-87d950dc', 'PROD-23CA662B', 'telefono rojo', 3000000.00, 1, '2026-08-28 21:00:40', '2026-08-28 21:00:40'),
+(35, 5, NULL, 'Pantalla Inteligente con Asistente de Voz (Hub Central)', 'pantalla-inteligente-hub-central-asistente-voz', 'SMH-CTRL-001', 'Hub central para controlar dispositivos inteligentes del hogar mediante voz.', 399900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(36, 5, NULL, 'Enchufe Inteligente Wi-Fi con Medidor de Consumo', 'enchufe-inteligente-wifi-medidor-consumo', 'SMH-CTRL-002', 'Enchufe conectado con medicion del consumo electrico.', 59900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(37, 5, NULL, 'Interruptor Táctil Inteligente de Pared (3 Canales)', 'interruptor-tactil-inteligente-pared-3-canales', 'SMH-CTRL-003', 'Interruptor inteligente de pared con control independiente de tres canales.', 99900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(38, 5, NULL, 'Control Remoto Infrarrojo Universal Wi-Fi', 'control-remoto-infrarrojo-universal-wifi', 'SMH-CTRL-004', 'Control universal Wi-Fi para equipos con mando infrarrojo.', 79900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(39, 6, NULL, 'Termostato Inteligente Programable Wi-Fi', 'termostato-inteligente-programable-wifi', 'SMH-CLIMA-001', 'Termostato programable conectado para controlar la climatizacion.', 519900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(40, 6, NULL, 'Purificador de Aire Inteligente con Control de App', 'purificador-aire-inteligente-control-app', 'SMH-CLIMA-002', 'Purificador de aire con control desde aplicacion movil.', 599900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(41, 6, NULL, 'Humidificador Ultrasónico Wi-Fi compatible con Alexa', 'humidificador-ultrasonico-wifi-alexa', 'SMH-CLIMA-003', 'Humidificador ultrasonico conectado y compatible con asistentes de voz.', 183900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(42, 7, NULL, 'Robot Aspirador y Trapeador con Mapeo Láser LiDAR', 'robot-aspirador-trapeador-mapeo-lidar', 'SMH-LIMP-001', 'Robot de limpieza con aspirado, trapeado y navegacion LiDAR.', 1199900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(43, 7, NULL, 'Tacho de Basura Automático con Sensor de Movimiento', 'tacho-basura-automatico-sensor-movimiento', 'SMH-LIMP-002', 'Basurero con apertura automatica mediante sensor de movimiento.', 199900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(44, 8, NULL, 'Cámara de Seguridad IP 360° para Interior con IA', 'camara-seguridad-ip-360-interior-ia', 'SMH-SEG-001', 'Camara IP interior con vision panoramica y funciones de inteligencia artificial.', 159900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(45, 8, NULL, 'Timbre Inteligente con Videocámara HD y Visión Nocturna', 'timbre-inteligente-videocamara-hd-vision-nocturna', 'SMH-SEG-002', 'Timbre conectado con video HD y vision nocturna.', 319900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(46, 8, NULL, 'Cerradura Digital Biométrica con Huella y Teclado', 'cerradura-digital-biometrica-huella-teclado', 'SMH-SEG-003', 'Cerradura digital con apertura por huella y teclado.', 479900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(47, 8, NULL, 'Sensor de Movimiento y Apertura de Puertas Wi-Fi', 'sensor-movimiento-apertura-puertas-wifi', 'SMH-SEG-004', 'Sensor conectado para detectar movimiento y apertura de puertas.', 75900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(48, 9, NULL, 'Bombilla LED RGBW Inteligente Wi-Fi', 'bombilla-led-rgbw-inteligente-wifi', 'SMH-LUZ-001', 'Bombilla LED conectada con iluminacion RGBW regulable.', 51900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(49, 9, NULL, 'Tira LED Inteligente Neón con Sincronización de Música', 'tira-led-neon-sincronizacion-musica', 'SMH-LUZ-002', 'Tira LED inteligente con efectos sincronizados con musica.', 139900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(50, 9, NULL, 'Lámpara de Noche Inteligente con Carga Inalámbrica', 'lampara-noche-inteligente-carga-inalambrica', 'SMH-LUZ-003', 'Lampara de noche conectada con base de carga inalambrica.', 159900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(51, 10, NULL, 'Freidora de Aire Inteligente con Pantalla Táctil', 'freidora-aire-inteligente-pantalla-tactil', 'SMH-COC-001', 'Freidora de aire con pantalla tactil y controles inteligentes.', 359900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(52, 10, NULL, 'Cafetera Inteligente Programable vía Smartphone', 'cafetera-inteligente-programable-smartphone', 'SMH-COC-002', 'Cafetera programable y controlable desde un smartphone.', 279900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(53, 11, NULL, 'Barra de Sonido Inteligente con Dolby Atmos', 'barra-sonido-inteligente-dolby-atmos', 'SMH-AUDIO-001', 'Barra de sonido conectada compatible con Dolby Atmos.', 719900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28'),
+(54, 11, NULL, 'Altavoz Inteligente Portátil con Bluetooth y Wi-Fi', 'altavoz-inteligente-portatil-bluetooth-wifi', 'SMH-AUDIO-002', 'Altavoz portatil inteligente con conectividad Bluetooth y Wi-Fi.', 239900.00, 1, '2026-09-30 20:31:28', '2026-09-30 20:31:28');
 
 -- --------------------------------------------------------
 
@@ -339,7 +422,27 @@ CREATE TABLE `product_images` (
 INSERT INTO `product_images` (`id`, `product_id`, `file_path`, `alt_text`, `sort_order`, `is_primary`, `created_at`) VALUES
 (6, 3, 'assets/images/products/1949ad55090750377c13013efdfda48e.jpg', 'iphone 18 rojo', 0, 1, '2026-08-28 21:09:59'),
 (7, 2, 'assets/images/products/457824874ff1f825d2f0fc5710acebaa.jpg', 'laptop lenovo 3-15', 0, 1, '2026-09-04 19:30:04'),
-(8, 1, 'assets/images/products/597ba994436d97cf1051e88c3da5849a.jpg', 'iphone 15 pro max', 0, 1, '2026-09-04 19:30:35');
+(8, 1, 'assets/images/products/597ba994436d97cf1051e88c3da5849a.jpg', 'iphone 15 pro max', 0, 1, '2026-09-04 19:30:35'),
+(71, 53, 'assets/images/products/15789a5249fafa40c64760a8a9dc500d.jpg', 'Barra de Sonido Inteligente con Dolby Atmos', 0, 1, '2026-09-30 20:33:33'),
+(72, 54, 'assets/images/products/5e8555e53c69850188c162ce07a0dab9.webp', 'Altavoz Inteligente Portátil con Bluetooth y Wi-Fi', 0, 1, '2026-09-30 20:34:00'),
+(73, 39, 'assets/images/products/b5fd8cd3010334d074641746860d2e29.webp', 'Termostato Inteligente Programable Wi-Fi', 0, 1, '2026-09-30 20:34:29'),
+(74, 40, 'assets/images/products/08fd6de9dd344d3c0da2104141d34b79.jpg', 'Purificador de Aire Inteligente con Control de App', 0, 1, '2026-09-30 20:34:58'),
+(75, 41, 'assets/images/products/4baef3a25b2f4c026026a4fcfe26a271.webp', 'Humidificador Ultrasónico Wi-Fi compatible con Alexa', 0, 1, '2026-09-30 20:35:23'),
+(76, 51, 'assets/images/products/fc5bf346decf0d11ed28b4d412da738f.webp', 'Freidora de Aire Inteligente con Pantalla Táctil', 0, 1, '2026-09-30 20:35:47'),
+(77, 52, 'assets/images/products/4489c261aa4baa319ffc8a9d6fc98079.webp', 'Cafetera Inteligente Programable vía Smartphone', 0, 1, '2026-09-30 20:36:11'),
+(78, 35, 'assets/images/products/0b291fda323ed08f2005ef5b08213e47.webp', 'Pantalla Inteligente con Asistente de Voz (Hub Central)', 0, 1, '2026-09-30 20:36:32'),
+(79, 36, 'assets/images/products/4ce4801b59770f4b6b835cf96751e782.jpg', 'Enchufe Inteligente Wi-Fi con Medidor de Consumo', 0, 1, '2026-09-30 20:37:01'),
+(80, 37, 'assets/images/products/06fc5091dc93135e3b678ce455dad3ab.webp', 'Interruptor Táctil Inteligente de Pared (3 Canales)', 0, 1, '2026-09-30 20:37:28'),
+(81, 38, 'assets/images/products/e65cc2b27602ec8272b65529e3177bd1.jpg', 'Control Remoto Infrarrojo Universal Wi-Fi', 0, 1, '2026-09-30 20:38:03'),
+(82, 48, 'assets/images/products/761e03ff7cfebb8678fd26ed814133e8.jpg', 'Bombilla LED RGBW Inteligente Wi-Fi', 0, 1, '2026-09-30 20:38:28'),
+(83, 49, 'assets/images/products/953d034cf1b4dc709c9d88a504c9eddb.jpg', 'Tira LED Inteligente Neón con Sincronización de Música', 0, 1, '2026-09-30 20:38:53'),
+(84, 50, 'assets/images/products/e3c00cc914f91bd1084445321a1b8b03.webp', 'Lámpara de Noche Inteligente con Carga Inalámbrica', 0, 1, '2026-09-30 20:39:23'),
+(85, 42, 'assets/images/products/698e711bddb759218eec918da203cb60.webp', 'Robot Aspirador y Trapeador con Mapeo Láser LiDAR', 0, 1, '2026-09-30 20:39:46'),
+(86, 43, 'assets/images/products/a4c223b8465cacccd2b6f432dfad44bf.jpg', 'Tacho de Basura Automático con Sensor de Movimiento', 0, 1, '2026-09-30 20:40:12'),
+(87, 44, 'assets/images/products/02b19d6aac691c5eee71a25d5672106d.webp', 'Cámara de Seguridad IP 360° para Interior con IA', 0, 1, '2026-09-30 20:40:37'),
+(88, 45, 'assets/images/products/db3ad806c44433d0a103d86ed5972eaa.webp', 'Timbre Inteligente con Videocámara HD y Visión Nocturna', 0, 1, '2026-09-30 20:41:04'),
+(89, 46, 'assets/images/products/9fef201a07118f591130a93efbbb3559.webp', 'Cerradura Digital Biométrica con Huella y Teclado', 0, 1, '2026-09-30 20:41:25'),
+(90, 47, 'assets/images/products/09e696cdeadeffa4cc1a612e1c16062b.jpg', 'Sensor de Movimiento y Apertura de Puertas Wi-Fi', 0, 1, '2026-09-30 20:41:47');
 
 -- --------------------------------------------------------
 
@@ -438,8 +541,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role_id`, `first_name`, `last_name`, `email`, `password_hash`, `phone`, `is_active`, `last_login_at`, `created_at`, `updated_at`) VALUES
 (2, 2, 'sheyla', 'castaño', 'shey@gmail.com', '$2y$10$5U6sDALwFCPgY4rk7rAor.wS/0Yk//bQ4NrC9x5i7612DbA7imtQu', NULL, 1, NULL, '2026-08-22 05:04:53', '2026-08-28 19:17:10'),
-(3, 2, 'samuel', 'santofimio', 'samsantofimioc2009@gmail.com', '$2y$10$FknntkFGbRnErfwCBws8iOhRapompXOewVOEA9rEhcmabVV2VNMgG', NULL, 1, '2026-09-04 13:41:08', '2026-08-22 05:10:03', '2026-09-04 18:41:08'),
-(12, 1, 'juan', 'sanchez', 'jsanchez@gmail.com', '$2y$10$8knHbLSODWpFvDdn0M.bLegBfa1OBUdXKdI3oF.wacJtZpAtJZ6g.', NULL, 1, '2026-09-16 13:54:55', '2026-09-16 18:54:11', '2026-09-16 18:54:55');
+(3, 1, 'samuel', 'santofimio', 'samsantofimioc2009@gmail.com', '$2y$10$FknntkFGbRnErfwCBws8iOhRapompXOewVOEA9rEhcmabVV2VNMgG', NULL, 1, '2026-10-16 15:24:45', '2026-08-22 05:10:03', '2026-10-16 20:24:45'),
+(12, 1, 'juan', 'sanchez', 'jsanchez@gmail.com', '$2y$10$8knHbLSODWpFvDdn0M.bLegBfa1OBUdXKdI3oF.wacJtZpAtJZ6g.', NULL, 1, '2026-09-30 13:56:41', '2026-09-16 18:54:11', '2026-09-30 18:56:41'),
+(14, 2, 'Zaraya', 'Bermudez', 'zarayber@gmail.com', '$2y$10$6P32KBDmT0QXhA2FtYvp/.YTZQW7Qi6qIV/PfEujQlpEGnQcNaHEy', NULL, 1, '2026-10-21 14:23:47', '2026-09-30 18:59:02', '2026-10-21 19:23:47');
 
 -- --------------------------------------------------------
 
@@ -637,7 +741,7 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT de la tabla `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `inventory_movements`
@@ -649,13 +753,13 @@ ALTER TABLE `inventory_movements`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `order_statuses`
@@ -667,7 +771,7 @@ ALTER TABLE `order_statuses`
 -- AUTO_INCREMENT de la tabla `order_status_history`
 --
 ALTER TABLE `order_status_history`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `payment_methods`
@@ -685,13 +789,13 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT de la tabla `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT de la tabla `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -709,7 +813,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas

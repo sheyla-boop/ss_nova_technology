@@ -23,6 +23,10 @@ return [
         'debug' => filter_var($environment['APP_DEBUG'] ?? false, FILTER_VALIDATE_BOOL),
         'url' => rtrim($environment['APP_URL'] ?? '', '/'),
     ],
+    'support' => [
+        'email' => trim($environment['SUPPORT_EMAIL'] ?? ''),
+        'phone' => trim($environment['SUPPORT_PHONE'] ?? ''),
+    ],
     'database' => [
         'host' => $environment['DB_HOST'] ?? '127.0.0.1',
         'port' => $environment['DB_PORT'] ?? '3306',

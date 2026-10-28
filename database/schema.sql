@@ -56,6 +56,8 @@ CREATE TABLE users (
     last_name VARCHAR(80) NOT NULL,
     email VARCHAR(190) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
+    privacy_policy_version VARCHAR(20) NULL,
+    privacy_accepted_at DATETIME NULL,
     phone VARCHAR(30) NULL,
     is_active TINYINT(1) NOT NULL DEFAULT 1,
     last_login_at DATETIME NULL,
@@ -304,7 +306,92 @@ INSERT INTO categories (name, slug, description) VALUES
     ('Celulares', 'celulares', 'Dispositivos moviles y telefonos inteligentes'),
     ('Computadores', 'computadores', 'Computadores portatiles y de escritorio'),
     ('Accesorios', 'accesorios', 'Accesorios y complementos tecnologicos'),
-    ('Tecnologia para el hogar', 'tecnologia-para-el-hogar', 'Dispositivos inteligentes para el hogar');
+    ('Tecnologia para el hogar', 'tecnologia-para-el-hogar', 'Dispositivos inteligentes para el hogar'),
+    ('Control e Infraestructura', 'control-infraestructura', 'Hubs, pantallas centrales, enchufes e interruptores inteligentes'),
+    ('Climatización y Calidad del Aire', 'climatizacion-calidad-aire', 'Termostatos, purificadores, humidificadores y deshumidificadores conectados'),
+    ('Limpieza y Mantenimiento', 'limpieza-mantenimiento', 'Robots aspiradores, mopas automáticas y basureros con sensor'),
+    ('Seguridad y Accesos', 'seguridad-accesos', 'Cámaras IP, timbres con video, cerraduras y sensores'),
+    ('Iluminación Inteligente', 'iluminacion-inteligente', 'Bombillas RGB, tiras LED, paneles y lámparas inteligentes'),
+    ('Cocina y Electrodomésticos', 'cocina-electrodomesticos', 'Freidoras, cafeteras, ollas y electrodomésticos conectados'),
+    ('Audio y Entretenimiento', 'audio-entretenimiento', 'Altavoces, barras de sonido, streaming y proyectores conectados');
 
 INSERT INTO brands (name, slug) VALUES
     ('Generica', 'generica');
+
+INSERT INTO products (category_id, name, slug, sku, description, price, is_active)
+SELECT c.id, seed.name, seed.slug, seed.sku, seed.description, seed.price, 1
+FROM categories c
+INNER JOIN (
+    SELECT 'Control e Infraestructura' AS category_name, 'Pantalla Inteligente con Asistente de Voz (Hub Central)' AS name, 'pantalla-inteligente-hub-central-asistente-voz' AS slug, 'SMH-CTRL-001' AS sku, 'Hub central para controlar dispositivos inteligentes del hogar mediante voz.' AS description, 399900.00 AS price
+    UNION ALL SELECT 'Control e Infraestructura', 'Enchufe Inteligente Wi-Fi con Medidor de Consumo', 'enchufe-inteligente-wifi-medidor-consumo', 'SMH-CTRL-002', 'Enchufe conectado con medicion del consumo electrico.', 59900.00
+    UNION ALL SELECT 'Control e Infraestructura', 'Interruptor Táctil Inteligente de Pared (3 Canales)', 'interruptor-tactil-inteligente-pared-3-canales', 'SMH-CTRL-003', 'Interruptor inteligente de pared con control independiente de tres canales.', 99900.00
+    UNION ALL SELECT 'Control e Infraestructura', 'Control Remoto Infrarrojo Universal Wi-Fi', 'control-remoto-infrarrojo-universal-wifi', 'SMH-CTRL-004', 'Control universal Wi-Fi para equipos con mando infrarrojo.', 79900.00
+    UNION ALL SELECT 'Climatización y Calidad del Aire', 'Termostato Inteligente Programable Wi-Fi', 'termostato-inteligente-programable-wifi', 'SMH-CLIMA-001', 'Termostato programable conectado para controlar la climatizacion.', 519900.00
+    UNION ALL SELECT 'Climatización y Calidad del Aire', 'Purificador de Aire Inteligente con Control de App', 'purificador-aire-inteligente-control-app', 'SMH-CLIMA-002', 'Purificador de aire con control desde aplicacion movil.', 599900.00
+    UNION ALL SELECT 'Climatización y Calidad del Aire', 'Humidificador Ultrasónico Wi-Fi compatible con Alexa', 'humidificador-ultrasonico-wifi-alexa', 'SMH-CLIMA-003', 'Humidificador ultrasonico conectado y compatible con asistentes de voz.', 183900.00
+    UNION ALL SELECT 'Limpieza y Mantenimiento', 'Robot Aspirador y Trapeador con Mapeo Láser LiDAR', 'robot-aspirador-trapeador-mapeo-lidar', 'SMH-LIMP-001', 'Robot de limpieza con aspirado, trapeado y navegacion LiDAR.', 1199900.00
+    UNION ALL SELECT 'Limpieza y Mantenimiento', 'Tacho de Basura Automático con Sensor de Movimiento', 'tacho-basura-automatico-sensor-movimiento', 'SMH-LIMP-002', 'Basurero con apertura automatica mediante sensor de movimiento.', 199900.00
+    UNION ALL SELECT 'Seguridad y Accesos', 'Cámara de Seguridad IP 360° para Interior con IA', 'camara-seguridad-ip-360-interior-ia', 'SMH-SEG-001', 'Camara IP interior con vision panoramica y funciones de inteligencia artificial.', 159900.00
+    UNION ALL SELECT 'Seguridad y Accesos', 'Timbre Inteligente con Videocámara HD y Visión Nocturna', 'timbre-inteligente-videocamara-hd-vision-nocturna', 'SMH-SEG-002', 'Timbre conectado con video HD y vision nocturna.', 319900.00
+    UNION ALL SELECT 'Seguridad y Accesos', 'Cerradura Digital Biométrica con Huella y Teclado', 'cerradura-digital-biometrica-huella-teclado', 'SMH-SEG-003', 'Cerradura digital con apertura por huella y teclado.', 479900.00
+    UNION ALL SELECT 'Seguridad y Accesos', 'Sensor de Movimiento y Apertura de Puertas Wi-Fi', 'sensor-movimiento-apertura-puertas-wifi', 'SMH-SEG-004', 'Sensor conectado para detectar movimiento y apertura de puertas.', 75900.00
+    UNION ALL SELECT 'Iluminación Inteligente', 'Bombilla LED RGBW Inteligente Wi-Fi', 'bombilla-led-rgbw-inteligente-wifi', 'SMH-LUZ-001', 'Bombilla LED conectada con iluminacion RGBW regulable.', 51900.00
+    UNION ALL SELECT 'Iluminación Inteligente', 'Tira LED Inteligente Neón con Sincronización de Música', 'tira-led-neon-sincronizacion-musica', 'SMH-LUZ-002', 'Tira LED inteligente con efectos sincronizados con musica.', 139900.00
+    UNION ALL SELECT 'Iluminación Inteligente', 'Lámpara de Noche Inteligente con Carga Inalámbrica', 'lampara-noche-inteligente-carga-inalambrica', 'SMH-LUZ-003', 'Lampara de noche conectada con base de carga inalambrica.', 159900.00
+    UNION ALL SELECT 'Cocina y Electrodomésticos', 'Freidora de Aire Inteligente con Pantalla Táctil', 'freidora-aire-inteligente-pantalla-tactil', 'SMH-COC-001', 'Freidora de aire con pantalla tactil y controles inteligentes.', 359900.00
+    UNION ALL SELECT 'Cocina y Electrodomésticos', 'Cafetera Inteligente Programable vía Smartphone', 'cafetera-inteligente-programable-smartphone', 'SMH-COC-002', 'Cafetera programable y controlable desde un smartphone.', 279900.00
+    UNION ALL SELECT 'Audio y Entretenimiento', 'Barra de Sonido Inteligente con Dolby Atmos', 'barra-sonido-inteligente-dolby-atmos', 'SMH-AUDIO-001', 'Barra de sonido conectada compatible con Dolby Atmos.', 719900.00
+    UNION ALL SELECT 'Audio y Entretenimiento', 'Altavoz Inteligente Portátil con Bluetooth y Wi-Fi', 'altavoz-inteligente-portatil-bluetooth-wifi', 'SMH-AUDIO-002', 'Altavoz portatil inteligente con conectividad Bluetooth y Wi-Fi.', 239900.00
+) seed ON seed.category_name = c.name;
+
+INSERT INTO inventory (product_id, quantity_available)
+SELECT p.id, seed.quantity_available
+FROM products p
+INNER JOIN (
+    SELECT 'SMH-CTRL-001' AS sku, 95 AS quantity_available
+    UNION ALL SELECT 'SMH-CTRL-002', 280
+    UNION ALL SELECT 'SMH-CTRL-003', 140
+    UNION ALL SELECT 'SMH-CTRL-004', 110
+    UNION ALL SELECT 'SMH-CLIMA-001', 65
+    UNION ALL SELECT 'SMH-CLIMA-002', 50
+    UNION ALL SELECT 'SMH-CLIMA-003', 85
+    UNION ALL SELECT 'SMH-LIMP-001', 40
+    UNION ALL SELECT 'SMH-LIMP-002', 75
+    UNION ALL SELECT 'SMH-SEG-001', 160
+    UNION ALL SELECT 'SMH-SEG-002', 90
+    UNION ALL SELECT 'SMH-SEG-003', 45
+    UNION ALL SELECT 'SMH-SEG-004', 210
+    UNION ALL SELECT 'SMH-LUZ-001', 350
+    UNION ALL SELECT 'SMH-LUZ-002', 130
+    UNION ALL SELECT 'SMH-LUZ-003', 80
+    UNION ALL SELECT 'SMH-COC-001', 60
+    UNION ALL SELECT 'SMH-COC-002', 35
+    UNION ALL SELECT 'SMH-AUDIO-001', 55
+    UNION ALL SELECT 'SMH-AUDIO-002', 120
+) seed ON seed.sku = p.sku;
+
+INSERT INTO product_images (product_id, file_path, alt_text, is_primary)
+SELECT p.id, seed.file_path, p.name, 1
+FROM products p
+INNER JOIN (
+    SELECT 'SMH-CTRL-001' AS sku, 'assets/images/products/smart-hub.jpg' AS file_path
+    UNION ALL SELECT 'SMH-CTRL-002', 'assets/images/products/smart-plug.jpg'
+    UNION ALL SELECT 'SMH-CTRL-003', 'assets/images/products/smart-plug.jpg'
+    UNION ALL SELECT 'SMH-CTRL-004', 'assets/images/products/ir-remote.jpg'
+    UNION ALL SELECT 'SMH-CLIMA-001', 'assets/images/products/smart-thermostat.jpg'
+    UNION ALL SELECT 'SMH-CLIMA-002', 'assets/images/products/air-purifier.jpg'
+    UNION ALL SELECT 'SMH-CLIMA-003', 'assets/images/products/smart-humidifier.jpg'
+    UNION ALL SELECT 'SMH-LIMP-001', 'assets/images/products/robot-vacuum.jpg'
+    UNION ALL SELECT 'SMH-LIMP-002', 'assets/images/products/auto-trash-bin.jpg'
+    UNION ALL SELECT 'SMH-SEG-001', 'assets/images/products/ip-camera.jpg'
+    UNION ALL SELECT 'SMH-SEG-002', 'assets/images/products/smart-plug.jpg'
+    UNION ALL SELECT 'SMH-SEG-003', 'assets/images/products/smart-plug.jpg'
+    UNION ALL SELECT 'SMH-SEG-004', 'assets/images/products/ip-camera.jpg'
+    UNION ALL SELECT 'SMH-LUZ-001', 'assets/images/products/rgbw-bulb.jpg'
+    UNION ALL SELECT 'SMH-LUZ-002', 'assets/images/products/neon-led-strip.jpg'
+    UNION ALL SELECT 'SMH-LUZ-003', 'assets/images/products/charging-night-lamp.jpg'
+    UNION ALL SELECT 'SMH-COC-001', 'assets/images/products/smart-air-fryer.jpg'
+    UNION ALL SELECT 'SMH-COC-002', 'assets/images/products/smart-coffee-maker.jpg'
+    UNION ALL SELECT 'SMH-AUDIO-001', 'assets/images/products/smart-soundbar.jpg'
+    UNION ALL SELECT 'SMH-AUDIO-002', 'assets/images/products/smart-hub.jpg'
+) seed ON seed.sku = p.sku;

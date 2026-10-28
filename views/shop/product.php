@@ -1,0 +1,8 @@
+<a class="back-link" href="/SS_NOVA_TECHNOLOGY/public/catalog">&#8592; Volver al catalogo</a>
+<article class="product-detail">
+    <div class="detail-image"><?php if (!empty($product['image_path'])): ?><img src="/SS_NOVA_TECHNOLOGY/public/<?= htmlspecialchars($product['image_path'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?>"><?php else: ?><span class="product-image-empty">SSN<span>TECH</span></span><?php endif; ?></div>
+    <div class="detail-copy"><p class="eyebrow"><?= htmlspecialchars($product['category_name'], ENT_QUOTES, 'UTF-8') ?></p><h1><?= htmlspecialchars($product['name'], ENT_QUOTES, 'UTF-8') ?></h1><p class="detail-price">$ <?= number_format((float) $product['price'], 0, ',', '.') ?> <small>COP</small></p><p class="detail-description"><?= nl2br(htmlspecialchars($product['description'] ?: 'Un producto seleccionado para acompañarte todos los dias.', ENT_QUOTES, 'UTF-8')) ?></p><p class="stock-note"><?= (int) $product['stock'] > 0 ? 'Disponible · ' . (int) $product['stock'] . ' unidades' : 'Agotado por el momento' ?></p>
+        <?php if ((int) $product['stock'] > 0): ?><form class="add-cart-form" method="post" action="/SS_NOVA_TECHNOLOGY/public/cart/add"><input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') ?>"><input type="hidden" name="product_id" value="<?= (int) $product['id'] ?>"><label>Cantidad<input type="number" name="quantity" min="1" max="<?= (int) $product['stock'] ?>" value="1"></label><button class="button" type="submit">Agregar al carrito</button></form><?php endif; ?>
+        <p class="delivery-note">Paga contraentrega y recibe tu pedido en casa.</p>
+    </div>
+</article>

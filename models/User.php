@@ -8,19 +8,26 @@ use PDO;
 
 final class User
 {
+    public const PRIVACY_POLICY_VERSION = '2026-10-16';
+
     public function __construct(private PDO $database)
     {
     }
 
-    public function findActiveByEmail(string $email): ?array
+    public function findActiveByEmail(string $email, ?string $roleName = null): ?array
     {
+        $roleFilter = $roleName === null ? '' : ' AND r.name = :role_name';
         $statement = $this->database->prepare(
                 'SELECT u.id, u.role_id, r.name AS role_name, u.first_name, u.last_name,
                     u.email, u.password_hash, u.is_active
                  FROM users u INNER JOIN roles r ON r.id = u.role_id
-                 WHERE u.email = :email LIMIT 1'
+                 WHERE u.email = :email' . $roleFilter . ' LIMIT 1'
         );
-        $statement->execute(['email' => $email]);
+        $parameters = ['email' => $email];
+        if ($roleName !== null) {
+            $parameters['role_name'] = $roleName;
+        }
+        $statement->execute($parameters);
         $user = $statement->fetch();
 
         return $user ?: null;
@@ -74,6 +81,15 @@ final class User
         return $this->database->query('SELECT id, name, description FROM roles ORDER BY name')->fetchAll();
     }
 
+    public static function passwordMeetsPolicy(string $password): bool
+    {
+        $length = mb_strlen($password);
+
+        return $length >= 8
+            && $length <= 200
+            && preg_match('/[\p{P}\p{S}]/u', $password) === 1;
+    }
+
     public function createAdminUser(array $data, string $passwordHash): void
     {
         $statement = $this->database->prepare(
@@ -102,19 +118,31 @@ final class User
         $this->setActive($id, false);
     }
 
-    public function createCustomer(string $firstName, string $lastName, string $email, string $passwordHash): int
+    public function createAccount(
+        string $firstName,
+        string $lastName,
+        string $email,
+        string $passwordHash,
+        string $privacyPolicyVersion,
+        string $roleName
+    ): int
     {
-        $roleStatement = $this->database->prepare("SELECT id FROM roles WHERE name = 'customer' LIMIT 1");
-        $roleStatement->execute();
+        $roleStatement = $this->database->prepare('SELECT id FROM roles WHERE name = :role LIMIT 1');
+        $roleStatement->execute(['role' => $roleName]);
         $roleId = $roleStatement->fetchColumn();
 
         if ($roleId === false) {
-            throw new \RuntimeException('El rol de cliente no esta configurado.');
+            throw new \RuntimeException('El rol seleccionado no esta configurado.');
         }
 
         $statement = $this->database->prepare(
-            'INSERT INTO users (role_id, first_name, last_name, email, password_hash)
-             VALUES (:role_id, :first_name, :last_name, :email, :password_hash)'
+            'INSERT INTO users (
+                role_id, first_name, last_name, email, password_hash,
+                privacy_policy_version, privacy_accepted_at
+             ) VALUES (
+                :role_id, :first_name, :last_name, :email, :password_hash,
+                :privacy_policy_version, NOW()
+             )'
         );
         $statement->execute([
             'role_id' => $roleId,
@@ -122,6 +150,7 @@ final class User
             'last_name' => $lastName,
             'email' => $email,
             'password_hash' => $passwordHash,
+            'privacy_policy_version' => $privacyPolicyVersion,
         ]);
 
         return (int) $this->database->lastInsertId();

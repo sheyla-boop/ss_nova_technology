@@ -24,7 +24,7 @@ Crear una base MVC ejecutable para que las siguientes fases agreguen autenticaci
 /docs/FASE-3-ESTRUCTURA-MVC.md
 /public/index.php
 /public/.htaccess
-/public/assets/css/app.css
+/public/assets/css/style.css
 /views/home/index.php
 /views/layouts/main.php
 ```
@@ -39,7 +39,7 @@ Crear una base MVC ejecutable para que las siguientes fases agreguen autenticaci
 - `controllers/HomeController.php`: controlador inicial de la pagina principal.
 - `views/layouts/main.php`: HTML compartido, navegacion y pie de pagina.
 - `views/home/index.php`: contenido de la pagina inicial.
-- `public/assets/css/app.css`: estilos base responsive.
+- `public/assets/css/style.css`: estilos base responsive.
 - `public/.htaccess`: redirige rutas que no son archivos o carpetas hacia el Front Controller.
 - `.env.example`: variables de configuracion que deben copiarse a `.env`.
 

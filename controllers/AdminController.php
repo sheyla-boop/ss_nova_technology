@@ -115,8 +115,9 @@ final class AdminController extends Controller
         if ($data['first_name'] === '' || mb_strlen($data['first_name']) > 80) $errors[] = 'Escribe un nombre valido.';
         if ($data['last_name'] === '' || mb_strlen($data['last_name']) > 80) $errors[] = 'Escribe un apellido valido.';
         if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL) || mb_strlen($data['email']) > 190) $errors[] = 'Escribe un correo valido.';
-        if (($required && strlen($password) < 8) || strlen($password) > 255) $errors[] = 'La contrasena debe tener entre 8 y 255 caracteres.';
-        if (!$required && $password !== '' && strlen($password) < 8) $errors[] = 'La nueva contrasena debe tener al menos 8 caracteres.';
+        if (($required || $password !== '') && !User::passwordMeetsPolicy($password)) {
+            $errors[] = 'La contraseña debe tener al menos 8 caracteres y contener al menos un signo o símbolo.';
+        }
         return $errors;
     }
 

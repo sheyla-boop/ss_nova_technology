@@ -8,6 +8,7 @@
     <label>Correo<input type="email" name="email" required maxlength="190" value="<?= htmlspecialchars($user['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>"></label>
     <label>Telefono<input name="phone" maxlength="30" value="<?= htmlspecialchars($user['phone'] ?? '', ENT_QUOTES, 'UTF-8') ?>"></label>
     <label>Rol<select name="role_id" required><?php foreach ($roles as $role): ?><option value="<?= (int) $role['id'] ?>" <?= (int) ($user['role_id'] ?? 0) === (int) $role['id'] ? 'selected' : '' ?>><?= htmlspecialchars($role['description'], ENT_QUOTES, 'UTF-8') ?></option><?php endforeach; ?></select></label>
-    <label>Contrasena<?= $user ? ' (dejar vacia para conservarla)' : '' ?><input type="password" name="password" <?= $user ? '' : 'required' ?> minlength="8" maxlength="255"></label>
+    <label>Contraseña<?= $user ? ' (dejar vacía para conservarla)' : '' ?><input type="password" name="password" <?= $user ? '' : 'required' ?> minlength="8" maxlength="200" pattern="(?=.*[\p{P}\p{S}]).*" title="Incluye al menos un signo o símbolo."></label>
+    <p class="form-note">Las contraseñas nuevas deben tener al menos 8 caracteres y un signo. <a href="/SS_NOVA_TECHNOLOGY/public/password-policy">Ver política completa</a>.</p>
     <button class="button" type="submit">Guardar usuario</button>
 </form>
